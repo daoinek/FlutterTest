@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
+import 'dart:math';
 
 
 
@@ -43,31 +43,27 @@ class CustomBackground extends StatefulWidget {
 }
 
 class CustomBackgroundState extends State<CustomBackground> {
-  int _tapCounter = 0;
+ // int _tapCounter = 0;
+  Color newColor = Colors.white;
 
-  Color getNewColor(int tapCounter) {
-    if (tapCounter % 2 == 0) {
+  Random random = new Random();
 
-      return Colors.white;
-
-    } else {
-      return Colors.green;
-
-    }
-
+  void changeIndex() {
+    setState(() => newColor = Color.fromARGB(255, random.nextInt(255), random.nextInt(255), random.nextInt(255)));
   }
+
 
   @override
   Widget build(BuildContext context) {
     return new GestureDetector(
       onTap: () {
         setState(() {
-          _tapCounter++;
+          changeIndex();
           print("Click");
         });
       },
       child: Container(
-        color: getNewColor(_tapCounter),
+        color: newColor,
         child: Center(
             child: Text("Hey there!",
                 style: TextStyle(
